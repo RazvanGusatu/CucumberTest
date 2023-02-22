@@ -1,4 +1,4 @@
-package StepDefinitions;
+package searchDefinitions;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
@@ -8,9 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.cucumber.java.en.*;
 
 public class GoogleSearchSteps {
-	
+
 	WebDriver driver = null;
-	
+
 	@SuppressWarnings("deprecation")
 	@Given("browser is open")
 	public void browser_is_open() {
