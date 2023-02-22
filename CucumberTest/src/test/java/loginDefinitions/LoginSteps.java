@@ -7,10 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.en.*;
+import pages.loginPage;
 
 public class LoginSteps {
 	
 	WebDriver driver = null;
+	loginPage login;
 
 	@SuppressWarnings("deprecation")
 	@Given("browser has been open")
@@ -32,20 +34,28 @@ public class LoginSteps {
 
 	@When("^user enters (.*) and (.*)$")
 	public void user_enters_username_and_password(String username, String password) throws InterruptedException {
-		driver.findElement(By.id("name")).sendKeys(username);
-		driver.findElement(By.id("password")).sendKeys(password);
+		
+		login = new loginPage(driver);
+		login.enterUsername(username);
+		login.enterPassword(password);
+		
+//		driver.findElement(By.id("name")).sendKeys(username);
+//		driver.findElement(By.id("password")).sendKeys(password);
+		
 		Thread.sleep(1000);
 	}
 
 	@And("user clicks on login")
 	public void user_clicks_on_login() {
-		driver.findElement(By.id("login")).click();
+		login.clickLogin();
+//		driver.findElement(By.id("login")).click();
 	}
 
 	
 	@Then("user is navigated to the home page")
 	public void user_is_navigated_to_the_home_page() throws InterruptedException {
-		driver.findElement(By.id("logout")).isDisplayed();
+		login.checkLogOutIsDisplayed();
+//		driver.findElement(By.id("logout")).isDisplayed();
 		
 		Thread.sleep(1000);
 		driver.close();
