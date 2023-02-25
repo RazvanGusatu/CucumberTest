@@ -1,22 +1,25 @@
-package loginDefinitions;
+package loginDefinitions_PF;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.en.*;
-import pom.loginPage;
+import pageFactory.HomePage_PF;
+import pageFactory.loginPage_PF;
 
-public class LoginSteps {
+public class LoginSteps_PF {
 	
 	WebDriver driver = null;
-	loginPage login;
+	loginPage_PF login;
+	HomePage_PF home;
 
 	@SuppressWarnings("deprecation")
 	@Given("browser has been open")
 	public void browser_has_been_open() {
+		System.out.println(" ==== I am inside LoginSteps_PF class ==== ");
+		
 		System.out.println("Inside Step - browser has been open");
 		String projectPath = System.getProperty("user.dir");
 		System.out.println("Project path is : "+projectPath);
@@ -35,28 +38,24 @@ public class LoginSteps {
 	@When("^user enters (.*) and (.*)$")
 	public void user_enters_username_and_password(String username, String password) throws InterruptedException {
 		
-		login = new loginPage(driver);
+		login = new loginPage_PF(driver);
 		login.enterUsername(username);
 		login.enterPassword(password);
-		
-//		driver.findElement(By.id("name")).sendKeys(username);
-//		driver.findElement(By.id("password")).sendKeys(password);
 		
 		Thread.sleep(1000);
 	}
 
 	@And("user clicks on login")
 	public void user_clicks_on_login() {
-		login.clickLogin();
-//		driver.findElement(By.id("login")).click();
+		login.clickOnLogin();
 	}
 
 	
 	@Then("user is navigated to the home page")
 	public void user_is_navigated_to_the_home_page() throws InterruptedException {
-		login.checkLogOutIsDisplayed();
-//		driver.findElement(By.id("logout")).isDisplayed();
-		
+		home = new HomePage_PF(driver);
+		home.checkLogoutIsDisplayed();
+
 		Thread.sleep(1000);
 		driver.close();
 		driver.quit();

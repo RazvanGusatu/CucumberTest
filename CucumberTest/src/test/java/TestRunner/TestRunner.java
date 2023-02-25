@@ -7,7 +7,7 @@ import io.cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features={"src/test/resources/Features/GoogleSearch.feature","src/test/resources/Features/Login.feature"},
-		glue= {"searchDefinitions","loginDefinitions"},
+		glue= {"searchDefinitions","loginDefinitions_PF"},
 monochrome=true,
 
 plugin = {"pretty", "junit:target/JunitReports/report.xml",
